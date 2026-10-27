@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReportaCampus</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="pouchdb-9.0.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>ReportaCampus</h1>
+        <p>Registro y seguimiento de incidencias de mantenimiento</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2 id="form-title">Registrar incidencia</h2>
+            <form id="report-form" novalidate>
+                <input type="hidden" id="report-id">
+                <input type="hidden" id="report-rev">
+
+                <div class="form-group">
+                    <label for="titulo">Título *</label>
+                    <input type="text" id="titulo" minlength="5" maxlength="80" required placeholder="Ej. Lámpara apagada en pasillo">
+                </div>
+
+                <div class="form-group">
+                    <label for="ubicacion">Ubicación *</label>
+                    <input type="text" id="ubicacion" required placeholder="Ej. Laboratorio 2">
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label for="categoria">Categoría *</label>
+                        <select id="categoria" required>
+                            <option value="">Selecciona...</option>
+                            <option value="Iluminación">Iluminación</option>
+                            <option value="Plomería">Plomería</option>
+                            <option value="Equipamiento">Equipamiento</option>
+                            <option value="Mobiliario">Mobiliario</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prioridad">Prioridad *</label>
+                        <select id="prioridad" required>
+                            <option value="">Selecciona...</option>
+                            <option value="Baja">Baja</option>
+                            <option value="Media">Media</option>
+                            <option value="Alta">Alta</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">Estado *</label>
+                        <select id="estado" required>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="En proceso">En proceso</option>
+                            <option value="Resuelta">Resuelta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción *</label>
+                    <textarea id="descripcion" minlength="10" maxlength="300" required placeholder="Describe el problema con detalle..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="btn-save" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="btn-cancel" class="btn btn-secondary">Cancelar</button>
+                </div>
+
+                <p id="form-msg" class="form-msg"></p>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>Listado de incidencias</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Ubicación</th>
+                            <th>Categoría</th>
+                            <th>Prioridad</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reports-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
